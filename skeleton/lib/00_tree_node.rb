@@ -31,7 +31,7 @@ class PolyTreeNode
     end
 
     def remove_child(removed_child)
-        self.children.delete(removed_child)
+        removed_child.parent.children.delete()
     end
     
 end
