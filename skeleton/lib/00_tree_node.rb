@@ -11,19 +11,23 @@ class PolyTreeNode
     end
 
     def parent=(new_parent)
-        # debugger
-        if parent != nil # adoption - remove old parent, add new parent
+        if parent != nil 
             parent.children.delete(self)
             @parent = new_parent
-            parent.children << self if !parent.children.include?(self)
-        elsif parent != nil && new_parent == nil # orpan - remove parent
+            if parent != nil
+                parent.children << self if !parent.children.include?(self)
+            end
+        elsif parent != nil && new_parent == nil 
             parent.children.delete(self)
             @parent = new_parent
-        else  # emancipation - 
+        else  
             @parent = new_parent
             parent.children << self if !parent.children.include?(self)
         end
     end
 
+    def add_child
+        parent=()
+    end
     
 end
