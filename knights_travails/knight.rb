@@ -53,6 +53,7 @@ class KnightPathFinder
   end
 
   def build_move_tree
+    debugger
     queue = [@root_node]
     until queue.empty?
       arr = new_move_positions(queue.shift.value)
