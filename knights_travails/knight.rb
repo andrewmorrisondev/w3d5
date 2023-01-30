@@ -2,6 +2,8 @@ require_relative '../skeleton/lib/00_tree_node.rb'
 
 class KnightPathFinder
 
+  attr_accessor :root_node
+
   def initialize(pos)
     @considered_positions = [pos]
     @root_node = PolyTreeNode.new(pos)
@@ -9,6 +11,7 @@ class KnightPathFinder
   end
 
   def self.valid_moves(pos) # [3,3]
+    # debugger
     valid_moves_arr = []
     move_equations = [
       [-1, -2], 
@@ -33,31 +36,41 @@ class KnightPathFinder
       if (new_x <= 7 && new_x >= 0) && (new_y <= 7 && new_y >= 0)
         valid_moves_arr << [new_x, new_y]
       end
+      p valid_moves_arr
       valid_moves_arr
     end
   end
 
   def new_move_positions(pos)
+    out_arr = []
     KnightPathFinder.valid_moves(pos).each do |el|
-      @considered_positions << pos if !@considered_positions.include?(pos)
+      if !@considered_positions.include?(el)
+        @considered_positions << el
+      end
+      if !@considered_positions.include?(el)
+        out_arr << el
+        # p el
+      end
     end
-    return @considered_positions
+    return out_arr
   end
 
   def build_move_tree
-    queue = [PolyTreeNode.new(start_pos)]
+    queue = [@root_node]
     until queue.empty?
-      new_move_positions(queue.shift.value)
-      @considered_positions.each do |el|
+      arr = new_move_positions(queue.shift.value)
+      arr.each do |el|
         queue << PolyTreeNode.new(el)
       end
     end
+    puts @considered_positions.length
   end
+
           
 ###### PART II ########
 
   def find_path(end_pos)
-    self.bfs(end_pos)
+    # self.bfs(end_pos)
   end
 end
 
