@@ -33,26 +33,30 @@ class KnightPathFinder
       if (new_x <= 7 && new_x >= 0) && (new_y <= 7 && new_y >= 0)
         valid_moves_arr << [new_x, new_y]
       end
-      @considered_positions += valid_moves_arr
       valid_moves_arr
     end
   end
 
   def new_move_positions(pos)
-    @considered_positions
-    # valid_moves(pos)
-    # valid_moves.each do |move|
-    #   if !@considered_positions.include?(move)
-    #     @considered_positions << move
-    #   end
-    # end
+    KnightPathFinder.valid_moves(pos).each do |el|
+      @considered_positions << pos if !@considered_positions.include?(pos)
+    end
+    return @considered_positions
   end
 
   def build_move_tree
-    queue = [Node.new(start_pos)]
-    new_move_positions(queue.shift)
-
+    queue = [PolyTreeNode.new(start_pos)]
+    until queue.empty?
+      new_move_positions(queue.shift.value)
+      @considered_positions.each do |el|
+        queue << PolyTreeNode.new(el)
+      end
+    end
   end
+          
+                            ###### PART II ########
 
-
+  def find_path()
+    
+  end
 end
