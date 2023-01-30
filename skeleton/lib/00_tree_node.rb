@@ -31,7 +31,10 @@ class PolyTreeNode
     end
 
     def remove_child(removed_child)
-        removed_child.parent.children.delete()
+        removed_child.parent=(nil)
     end
     
+    def dfs(target_value)
+        self.value 
+    end
 end
