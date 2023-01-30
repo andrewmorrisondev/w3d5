@@ -10,8 +10,7 @@ class KnightPathFinder
     self.build_move_tree
   end
 
-  def self.valid_moves(pos) # [3,3]
-    # debugger
+  def self.valid_moves(pos) 
     valid_moves_arr = []
     move_equations = [
       [-1, -2], 
@@ -36,9 +35,8 @@ class KnightPathFinder
       if (new_x <= 7 && new_x >= 0) && (new_y <= 7 && new_y >= 0)
         valid_moves_arr << [new_x, new_y]
       end
-      p valid_moves_arr
-      valid_moves_arr
     end
+    valid_moves_arr
   end
 
   def new_move_positions(pos)
@@ -49,7 +47,6 @@ class KnightPathFinder
       end
       if !@considered_positions.include?(el)
         out_arr << el
-        # p el
       end
     end
     return out_arr
@@ -63,17 +60,17 @@ class KnightPathFinder
         queue << PolyTreeNode.new(el)
       end
     end
-    puts @considered_positions.length
   end
+
 
           
 ###### PART II ########
 
   def find_path(end_pos)
-    # self.bfs(end_pos)
+    @root_node.bfs(end_pos)
   end
 end
 
-kpf = KnightPathFinder.new([0, 0])
+kpf = KnightPathFinder.new([3, 3])
 kpf.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
 kpf.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
