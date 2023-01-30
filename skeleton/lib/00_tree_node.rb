@@ -35,6 +35,13 @@ class PolyTreeNode
     end
     
     def dfs(target_value)
-        self.value 
+        # debugger
+        return self if self.value == target_value
+        self.children.each do |ele|
+            memo = ele.dfs(target_value)
+            return memo if memo != nil
+        end
+        return nil
     end
+
 end
